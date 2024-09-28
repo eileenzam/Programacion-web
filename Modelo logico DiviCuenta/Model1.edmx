@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="Model1TargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ComesalesSet" EntityType="Model1.Comesales" />
+          <EntitySet Name="UsuariosSet" EntityType="Model1.Usuarios" />
+          <EntitySet Name="RestaurantesSet" EntityType="Model1.Restaurantes" />
+          <EntitySet Name="SucursalesSet" EntityType="Model1.Sucursales" />
+          <EntitySet Name="MenúsSet" EntityType="Model1.Menús" />
+          <EntitySet Name="PedidosSet" EntityType="Model1.Pedidos" />
+          <EntitySet Name="Detalles_PedidoSet" EntityType="Model1.Detalles_Pedido" />
+          <EntitySet Name="PromocionesSet" EntityType="Model1.Promociones" />
+          <EntitySet Name="Promociones_BancosSet" EntityType="Model1.Promociones_Bancos" />
+          <EntitySet Name="PagosSet" EntityType="Model1.Pagos" />
+          <AssociationSet Name="UsuariosComesales" Association="Model1.UsuariosComesales">
+            <End Role="Usuarios" EntitySet="UsuariosSet" />
+            <End Role="Comesales" EntitySet="ComesalesSet" />
+          </AssociationSet>
+          <AssociationSet Name="RestaurantesSucursales" Association="Model1.RestaurantesSucursales">
+            <End Role="Restaurantes" EntitySet="RestaurantesSet" />
+            <End Role="Sucursales" EntitySet="SucursalesSet" />
+          </AssociationSet>
+          <AssociationSet Name="SucursalesMenús" Association="Model1.SucursalesMenús">
+            <End Role="Sucursales" EntitySet="SucursalesSet" />
+            <End Role="Menús" EntitySet="MenúsSet" />
+          </AssociationSet>
+          <AssociationSet Name="PedidosComesales" Association="Model1.PedidosComesales">
+            <End Role="Pedidos" EntitySet="PedidosSet" />
+            <End Role="Comesales" EntitySet="ComesalesSet" />
+          </AssociationSet>
+          <AssociationSet Name="PedidosDetalles_Pedido" Association="Model1.PedidosDetalles_Pedido">
+            <End Role="Pedidos" EntitySet="PedidosSet" />
+            <End Role="Detalles_Pedido" EntitySet="Detalles_PedidoSet" />
+          </AssociationSet>
+          <AssociationSet Name="Detalles_PedidoMenús" Association="Model1.Detalles_PedidoMenús">
+            <End Role="Detalles_Pedido" EntitySet="Detalles_PedidoSet" />
+            <End Role="Menús" EntitySet="MenúsSet" />
+          </AssociationSet>
+          <AssociationSet Name="PromocionesPromociones_Bancos" Association="Model1.PromocionesPromociones_Bancos">
+            <End Role="Promociones" EntitySet="PromocionesSet" />
+            <End Role="Promociones_Bancos" EntitySet="Promociones_BancosSet" />
+          </AssociationSet>
+          <AssociationSet Name="ComesalesPagos" Association="Model1.ComesalesPagos">
+            <End Role="Comesales" EntitySet="ComesalesSet" />
+            <End Role="Pagos" EntitySet="PagosSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Comesales">
+          <Key>
+            <PropertyRef Name="Id_Comesal" />
+          </Key>
+          <Property Name="Id_Comesal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Usuarios" Relationship="Model1.UsuariosComesales" FromRole="Comesales" ToRole="Usuarios" />
+          <Property Name="UsuariosId_Usuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pedidos" Relationship="Model1.PedidosComesales" FromRole="Comesales" ToRole="Pedidos" />
+          <Property Name="PedidosId_Pedido" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pagos" Relationship="Model1.ComesalesPagos" FromRole="Comesales" ToRole="Pagos" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Comesales" Relationship="Model1.UsuariosComesales" FromRole="Usuarios" ToRole="Comesales" />
+        </EntityType>
+        <EntityType Name="Restaurantes">
+          <Key>
+            <PropertyRef Name="Id_Restaurante" />
+          </Key>
+          <Property Name="Id_Restaurante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Sucursales" Relationship="Model1.RestaurantesSucursales" FromRole="Restaurantes" ToRole="Sucursales" />
+        </EntityType>
+        <EntityType Name="Sucursales">
+          <Key>
+            <PropertyRef Name="Id_Sucursal" />
+          </Key>
+          <Property Name="Id_Sucursal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Restaurantes" Relationship="Model1.RestaurantesSucursales" FromRole="Sucursales" ToRole="Restaurantes" />
+          <Property Name="RestaurantesId_Restaurante" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Menús" Relationship="Model1.SucursalesMenús" FromRole="Sucursales" ToRole="Menús" />
+        </EntityType>
+        <EntityType Name="Menús">
+          <Key>
+            <PropertyRef Name="Id_Menu" />
+          </Key>
+          <Property Name="Id_Menu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Sucursales" Relationship="Model1.SucursalesMenús" FromRole="Menús" ToRole="Sucursales" />
+          <Property Name="SucursalesId_Sucursal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Detalles_Pedido" Relationship="Model1.Detalles_PedidoMenús" FromRole="Menús" ToRole="Detalles_Pedido" />
+          <Property Name="Detalles_PedidoId_DetallePedido" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pedidos">
+          <Key>
+            <PropertyRef Name="Id_Pedido" />
+          </Key>
+          <Property Name="Id_Pedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Comesales" Relationship="Model1.PedidosComesales" FromRole="Pedidos" ToRole="Comesales" />
+          <NavigationProperty Name="Detalles_Pedido" Relationship="Model1.PedidosDetalles_Pedido" FromRole="Pedidos" ToRole="Detalles_Pedido" />
+        </EntityType>
+        <EntityType Name="Detalles_Pedido">
+          <Key>
+            <PropertyRef Name="Id_DetallePedido" />
+          </Key>
+          <Property Name="Id_DetallePedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Pedidos" Relationship="Model1.PedidosDetalles_Pedido" FromRole="Detalles_Pedido" ToRole="Pedidos" />
+          <Property Name="PedidosId_Pedido" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Menús" Relationship="Model1.Detalles_PedidoMenús" FromRole="Detalles_Pedido" ToRole="Menús" />
+        </EntityType>
+        <EntityType Name="Promociones">
+          <Key>
+            <PropertyRef Name="Id_Promocion" />
+          </Key>
+          <Property Name="Id_Promocion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Promociones_Bancos" Relationship="Model1.PromocionesPromociones_Bancos" FromRole="Promociones" ToRole="Promociones_Bancos" />
+        </EntityType>
+        <EntityType Name="Promociones_Bancos">
+          <Key>
+            <PropertyRef Name="Id_Promociones_Banco" />
+          </Key>
+          <Property Name="Id_Promociones_Banco" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Promociones" Relationship="Model1.PromocionesPromociones_Bancos" FromRole="Promociones_Bancos" ToRole="Promociones" />
+          <Property Name="PromocionesId_Promocion" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="Id_Pago" />
+          </Key>
+          <Property Name="Id_Pago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Comesales" Relationship="Model1.ComesalesPagos" FromRole="Pagos" ToRole="Comesales" />
+          <Property Name="ComesalesId_Comesal" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UsuariosComesales">
+          <End Type="Model1.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="Model1.Comesales" Role="Comesales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="Comesales">
+              <PropertyRef Name="UsuariosId_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RestaurantesSucursales">
+          <End Type="Model1.Restaurantes" Role="Restaurantes" Multiplicity="1" />
+          <End Type="Model1.Sucursales" Role="Sucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurantes">
+              <PropertyRef Name="Id_Restaurante" />
+            </Principal>
+            <Dependent Role="Sucursales">
+              <PropertyRef Name="RestaurantesId_Restaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SucursalesMenús">
+          <End Type="Model1.Sucursales" Role="Sucursales" Multiplicity="1" />
+          <End Type="Model1.Menús" Role="Menús" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursales">
+              <PropertyRef Name="Id_Sucursal" />
+            </Principal>
+            <Dependent Role="Menús">
+              <PropertyRef Name="SucursalesId_Sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PedidosComesales">
+          <End Type="Model1.Pedidos" Role="Pedidos" Multiplicity="1" />
+          <End Type="Model1.Comesales" Role="Comesales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedidos">
+              <PropertyRef Name="Id_Pedido" />
+            </Principal>
+            <Dependent Role="Comesales">
+              <PropertyRef Name="PedidosId_Pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PedidosDetalles_Pedido">
+          <End Type="Model1.Pedidos" Role="Pedidos" Multiplicity="1" />
+          <End Type="Model1.Detalles_Pedido" Role="Detalles_Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedidos">
+              <PropertyRef Name="Id_Pedido" />
+            </Principal>
+            <Dependent Role="Detalles_Pedido">
+              <PropertyRef Name="PedidosId_Pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Detalles_PedidoMenús">
+          <End Type="Model1.Detalles_Pedido" Role="Detalles_Pedido" Multiplicity="1" />
+          <End Type="Model1.Menús" Role="Menús" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detalles_Pedido">
+              <PropertyRef Name="Id_DetallePedido" />
+            </Principal>
+            <Dependent Role="Menús">
+              <PropertyRef Name="Detalles_PedidoId_DetallePedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PromocionesPromociones_Bancos">
+          <End Type="Model1.Promociones" Role="Promociones" Multiplicity="1" />
+          <End Type="Model1.Promociones_Bancos" Role="Promociones_Bancos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promociones">
+              <PropertyRef Name="Id_Promocion" />
+            </Principal>
+            <Dependent Role="Promociones_Bancos">
+              <PropertyRef Name="PromocionesId_Promocion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ComesalesPagos">
+          <End Type="Model1.Comesales" Role="Comesales" Multiplicity="1" />
+          <End Type="Model1.Pagos" Role="Pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comesales">
+              <PropertyRef Name="Id_Comesal" />
+            </Principal>
+            <Dependent Role="Pagos">
+              <PropertyRef Name="ComesalesId_Comesal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Model1" />
+        <Alias Key="Target" Value="Model1.Store" />
+        <EntityContainerMapping CdmEntityContainer="Model1Container" StorageEntityContainer="Model1TargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

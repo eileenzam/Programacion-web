@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="beb15bf2a55a4d24b158be7c92d85e1d" Name="Diagram1" >
+        <EntityTypeShape EntityType="Model1.Comesales" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="Model1.Usuarios" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="Model1.Restaurantes" Width="1.5" PointX="7.625" PointY="0.75" />
+        <EntityTypeShape EntityType="Model1.Sucursales" Width="1.5" PointX="7.5" PointY="2.625" />
+        <EntityTypeShape EntityType="Model1.Menús" Width="1.5" PointX="5.125" PointY="2.75" />
+        <EntityTypeShape EntityType="Model1.Pedidos" Width="1.5" PointX="3" PointY="3.625" />
+        <EntityTypeShape EntityType="Model1.Detalles_Pedido" Width="1.5" PointX="5.25" PointY="5.25" />
+        <EntityTypeShape EntityType="Model1.Promociones" Width="1.5" PointX="10.375" PointY="1.75" />
+        <EntityTypeShape EntityType="Model1.Promociones_Bancos" Width="1.875" PointX="12.875" PointY="1.75" />
+        <EntityTypeShape EntityType="Model1.Pagos" Width="1.5" PointX="5.125" PointY="0.875" />
+        <AssociationConnector Association="Model1.UsuariosComesales" />
+        <AssociationConnector Association="Model1.RestaurantesSucursales" />
+        <AssociationConnector Association="Model1.SucursalesMenús" />
+        <AssociationConnector Association="Model1.PedidosComesales" />
+        <AssociationConnector Association="Model1.PedidosDetalles_Pedido" />
+        <AssociationConnector Association="Model1.Detalles_PedidoMenús" />
+        <AssociationConnector Association="Model1.PromocionesPromociones_Bancos" />
+        <AssociationConnector Association="Model1.ComesalesPagos" />
+        <EntityTypeShape EntityType="Model1.Mesero" Width="1.5" PointX="10.5" PointY="4.125" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
